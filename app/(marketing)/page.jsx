@@ -5,11 +5,30 @@ import { Button } from "@/components/ui/button";
 import { ArrowRightIcon } from "@/lib/icons";
 
 export default function Component() {
-  const [ prompt, setPrompt ] = useState("");
 
-  const handleSubmitPrompt = () => {
-    console.log('prompt: ', prompt)
+  const [ prompt, setPrompt ] = useState("");
+  const [ responses, setResponses ] = useState([])
+
+  const handleSubmitPrompt = async () => {
+    try {
+        // post request to server    
+        const response = await fetch('/api/openai', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json'},
+            body: JSON.stringify({ prompt })
+        })
+        // response
+        const {message, usage} = await response.json();
+        // update state
+        setResponses([...responses, {message, usage}]);
+    } catch (error) {
+        console.log('There was an error in the request: ', error)
+    }
   }
+
+  useEffect(()=> {
+    console.log('responses: ', responses)
+  }, [responses])
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen space-y-6">
