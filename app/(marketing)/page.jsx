@@ -1,19 +1,38 @@
-// import dynamic from 'next/dynamic';
-// // _components
-// // import Navbar from "./_components/navbar";
-// // import Hero from "./_components/hero";
-// //styles
-// // import "./_components/custom-css.css";
-
-// // Dynamic imports
-// const Footer = dynamic(() => import('./_components/footer'), { ssr: false });
-// const HowItWorks = dynamic(() => import('./_components/howItWorks'), { ssr: false });
-// const UpcomingEvents = dynamic(() => import('./_components/upcomingEvents'), { ssr: false });
+"use client";
+import { useState, useEffect } from "react";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { ArrowRightIcon } from "@/lib/icons";
 
 export default function Component() {
+  const [ prompt, setPrompt ] = useState("");
+
+  const handleSubmitPrompt = () => {
+    console.log('prompt: ', prompt)
+  }
+
   return (
-    <div className="flex align-middle justify-center w-full">
-      Home
+    <div className="flex flex-col items-center justify-center min-h-screen space-y-6">
+      <h1 className="text-4xl font-bold">Generate. Refine. Ship.</h1>
+      <p className="text-lg text-muted-foreground">
+        Generate UI with shadcn/ui from simple text prompts and images.
+      </p>
+      <div className="flex items-center w-full max-w-md p-4 space-x-2 bg-black rounded-md">
+        <Input
+          value={prompt}
+          onChange={(e)=>{setPrompt(e.target.value)}}
+          type="text"
+          placeholder="A chat application"
+          className="flex-1 bg-transparent border-none text-white placeholder:text-muted-foreground focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0 "
+        />
+        <Button
+            onClick={handleSubmitPrompt}
+            variant="ghost" 
+            className="text-white"
+        >
+          <ArrowRightIcon className="w-5 h-5" />
+        </Button>
+      </div>
     </div>
-  )
+  );
 }
