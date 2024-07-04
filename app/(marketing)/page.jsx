@@ -20,6 +20,7 @@ export default function Component() {
   const handleSubmitPrompt = async () => {
     try {
         // post request to server
+        if(!prompt) return;
         setLoading(true);
         const response = await fetch('/api/openai', {
             method: 'POST',
@@ -69,18 +70,22 @@ export default function Component() {
                             </div>
                         </div>
                         {/* Response */}
-                        <div className="flex shadow-sm items-center justify-between px-4 py-3 rounded-md bg-[#fcfcfc]">
+                        <div className="flex shadow-sm items-center justify-between px-4 py-4 rounded-md bg-[#fcfcfc]">
                             <div className="flex items-center gap-2">
-                                <Avatar className="hidden md:block">
-                                    <AvatarImage src="https://images.unsplash.com/photo-1638132035918-90a22beaab3b?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8d2hpdGV8ZW58MHx8MHx8fDI%3D" />
-                                    <AvatarFallback>AI</AvatarFallback>
-                                </Avatar>
+                                
                                 <div className="pl-6">
-                                    <div className="font-medium text-base mb-2">
-                                        Assistant · {formatTimestamp(response.createdAt)}
+                                    <div className="flex items-center space-x-2 font-medium text-base mb-2">
+                                        <Avatar className="hidden md:block" style={{ width: '30px', height: '30px' }}>
+                                            <AvatarImage src="https://images.unsplash.com/photo-1696777406868-5258913ef41d?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Ymx1ZXxlbnwwfHwwfHx8MA%3D%3D" />
+                                            <AvatarFallback>AI</AvatarFallback>
+                                        </Avatar>
+                                        <span>Assistant</span> 
+                                        <span>·</span>
+                                        <span className="text-gray-400 font-normal"> {formatTimestamp(response.createdAt)}</span>
                                     </div>
-                                    <div className="text-base text-muted-foreground">
-                                        {response.message.content}
+                                    <div 
+                                        dangerouslySetInnerHTML={{ __html: response.message.content }}
+                                        className="text-base text-muted-foreground">
                                     </div>
                                 </div>
                             </div>
@@ -99,12 +104,20 @@ export default function Component() {
 }
 
 const PromptSender = ({prompt, setPrompt, handleSubmitPrompt, loading}) => {
+    const handleKeyPress = (event) => {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            handleSubmitPrompt();
+        }
+    };
+    
     return(
         <div className="sticky bottom-[2em] flex flex-col w-full max-w-md">
             <div className="flex shadow-lg items-center w-full max-w-md p-4 space-x-2 bg-white rounded-md">
                 <Input
                     value={prompt}
                     onChange={(e)=>{setPrompt(e.target.value)}}
+                    onKeyDownCapture={handleKeyPress}
                     type="text"
                     placeholder="Write down your thought"
                     className="flex-1 text-base bg-transparent border-none text-black placeholder:text-muted-foreground focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0 "
@@ -112,7 +125,7 @@ const PromptSender = ({prompt, setPrompt, handleSubmitPrompt, loading}) => {
                 <Button onClick={handleSubmitPrompt} variant="ghost"  className={`text-white ${loading && 'hover:bg-transparent focus-visible:ring-offset-0 focus-visible:ring-0 focus-visible:ring-transparent'}`} >
                     {
                         loading
-                            ? <Loading width={10} height={10} noText={true} />
+                            ? <Loading width={10} height={10}  noText={true} />
                             : <ArrowRightIcon className="w-5 h-5" />
                     }
                 </Button>

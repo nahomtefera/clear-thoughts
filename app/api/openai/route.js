@@ -5,7 +5,7 @@ const openai = new OpenAI({ apiKey: process.env.NEXT_PUBLIC_OPENAI_SECRET_KEY })
 
 export async function POST(req) {
     const { prompt } = await req.json();
-    const context = "You're a therapist. Briefly analyze if a thought is good or bad, explain why, and suggest a positive reframe: ";
+    const context = "You're a therapist. Briefly analyze if a thought is good or bad, explain why, and suggest a positive reframe, wrap the response as html elements, bold 'analysis' and 'positive frame' in a new line: ";
 
     try {       
         const completion = await openai.chat.completions.create({
