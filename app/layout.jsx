@@ -21,7 +21,10 @@ export default function Layout({ children }) {
     <html lang="en">
       <body 
         className={cn(
-          'antialiased',
+          `antialiased 
+            bg-[linear-gradient(to_bottom,_white,_#c9e7ff69,_#ffe7e76b,_white)]
+            md:bg-gradient-to-br md:from-[#c9e7ff69] to-[#ffe7e76b]
+          `,
           fontHeading.variable,
           fontBody.variable
         )}
