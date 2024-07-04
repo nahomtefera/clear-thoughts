@@ -109,7 +109,7 @@ const PromptSender = ({prompt, setPrompt, handleSubmitPrompt, loading}) => {
                     placeholder="Write down your thought"
                     className="flex-1 text-base bg-transparent border-none text-black placeholder:text-muted-foreground focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0 "
                 />
-                <Button onClick={handleSubmitPrompt} variant="ghost"  className={`text-white ${loading && 'hover:bg-transparent'}`} >
+                <Button onClick={handleSubmitPrompt} variant="ghost"  className={`text-white ${loading && 'hover:bg-transparent focus-visible:ring-offset-0 focus-visible:ring-0 focus-visible:ring-transparent'}`} >
                     {
                         loading
                             ? <Loading width={10} height={10} noText={true} />
