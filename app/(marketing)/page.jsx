@@ -104,6 +104,7 @@ export default function Component() {
 }
 
 const PromptSender = ({prompt, setPrompt, handleSubmitPrompt, loading}) => {
+    // submit on enter
     const handleKeyPress = (event) => {
         if (event.key === 'Enter') {
             event.preventDefault();
