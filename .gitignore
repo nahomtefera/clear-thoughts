@@ -7,7 +7,7 @@
 .yarn/install-state.gz
 
 # map files
-*.map
+/*.map
 
 # testing
 /coverage

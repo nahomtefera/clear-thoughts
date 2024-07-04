@@ -12,7 +12,7 @@ import {mockResponses} from '@/lib/mockData'
 
 export default function Component() {
 
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
   const [ prompt, setPrompt ] = useState("");
   const [ responses, setResponses ] = useState([]);
   const bottomRef = useRef(null);
