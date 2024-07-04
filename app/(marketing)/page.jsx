@@ -84,7 +84,7 @@ export default function Component() {
                                         <span className="text-gray-400 font-normal"> {formatTimestamp(response.createdAt)}</span>
                                     </div>
                                     <div 
-                                        dangerouslySetInnerHTML={{ __html: response.message.content }}
+                                        dangerouslySetInnerHTML={{ __html: response.message.content.replace(/```html|```/g, '').trim()}}
                                         className="text-base text-muted-foreground">
                                     </div>
                                 </div>
