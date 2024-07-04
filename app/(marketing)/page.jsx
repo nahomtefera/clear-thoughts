@@ -55,10 +55,10 @@ export default function Component() {
         {
             responses && responses.map( (response, key) => {
                 return(
-                    <div>
+                    <div key={key}>
                         {/* Propmt */}
                         <div className="flex justify-end">
-                            <div key={key} className="my-4 inline-block shadow-sm items-center justify-end px-4 py-3 rounded-md bg-black">
+                            <div  className="my-4 inline-block shadow-sm items-center justify-end px-4 py-3 rounded-md bg-black">
                                 <div className="flex items-center gap-2">
                                     <div>
                                         <div className="text-base text-white">
@@ -69,7 +69,7 @@ export default function Component() {
                             </div>
                         </div>
                         {/* Response */}
-                        <div key={key} className="flex shadow-sm items-center justify-between px-4 py-3 rounded-md bg-[#fcfcfc]">
+                        <div className="flex shadow-sm items-center justify-between px-4 py-3 rounded-md bg-[#fcfcfc]">
                             <div className="flex items-center gap-2">
                                 <Avatar className="hidden md:block">
                                     <AvatarImage src="https://images.unsplash.com/photo-1638132035918-90a22beaab3b?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8d2hpdGV8ZW58MHx8MHx8fDI%3D" />
