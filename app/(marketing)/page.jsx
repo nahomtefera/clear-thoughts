@@ -12,7 +12,7 @@ import {mockResponses} from '@/lib/mockData'
 
 export default function Component() {
 
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
   const [ prompt, setPrompt ] = useState("");
   const [ responses, setResponses ] = useState([]);
   const bottomRef = useRef(null);
@@ -75,7 +75,7 @@ export default function Component() {
                                 
                                 <div className="pl-6">
                                     <div className="flex items-center space-x-2 font-medium text-base mb-2">
-                                        <Avatar className="hidden md:block" style={{ width: '30px', height: '30px' }}>
+                                        <Avatar style={{ width: '30px', height: '30px' }}>
                                             <AvatarImage src="https://images.unsplash.com/photo-1696777406868-5258913ef41d?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Ymx1ZXxlbnwwfHwwfHx8MA%3D%3D" />
                                             <AvatarFallback>AI</AvatarFallback>
                                         </Avatar>
